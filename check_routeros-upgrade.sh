@@ -42,7 +42,7 @@ elif [ "$1" = "ssh" ]; then
     if ! ROUTEROS_INSTALLED=$(ssh -q -p "$PARAM_PORT" "$PARAM_USER"@"$2" "/system package update print"); then
         ERROR_MSG="Could not establish an SSH connection to the device!"
     else
-        ROUTEROS_INSTALLED=$(echo $ROUTEROS_INSTALLED | tr -d '\r\n' | cut -d ' ' -f 4)
+        ROUTEROS_INSTALLED=$(echo "$ROUTEROS_INSTALLED" | tr -d '\r\n' | cut -d ' ' -f 4)
     fi
 else
     echo "Use SNMP or SSH as connection type!"
