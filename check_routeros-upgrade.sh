@@ -43,7 +43,6 @@ elif [ "$1" = "ssh" ]; then
         ERROR_MSG="Could not establish an SSH connection to the device!"
     else
         ROUTEROS_INSTALLED=$(echo "$ROUTEROS_INSTALLED" | grep "installed" | tr -d '\r\n' | tr -d ' ' | cut -d ':' -f 2)
-        #echo "$ROUTEROS_INSTALLED"
     fi
 else
     echo "Use SNMP or SSH as connection type!"
