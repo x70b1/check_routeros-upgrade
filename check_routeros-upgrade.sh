@@ -42,7 +42,8 @@ elif [ "$1" = "ssh" ]; then
     if ! ROUTEROS_INSTALLED=$(ssh -q -p "$PARAM_PORT" "$PARAM_USER"@"$2" "/system package update print"); then
         ERROR_MSG="Could not establish an SSH connection to the device!"
     else
-        ROUTEROS_INSTALLED=$(echo "$ROUTEROS_INSTALLED" | tr -d '\r\n' | cut -d ' ' -f 4)
+        ROUTEROS_INSTALLED=$(echo "$ROUTEROS_INSTALLED" | grep "installed" | tr -d '\r\n' | tr -d ' ' | cut -d ':' -f 2)
+        #echo "$ROUTEROS_INSTALLED"
     fi
 else
     echo "Use SNMP or SSH as connection type!"
@@ -70,7 +71,9 @@ if [ "$ERROR_MSG" = "0" ]; then
 
     # check the mikrotik server for upgrades
     if ! ROUTEROS_AVAILABLE=$(curl -f -s -A 'check_routeros-upgrade' http://upgrade.mikrotik.com/routeros/LATEST.$PARAM_VERSION); then 
-        ERROR_MSG="Could not reach the mikrotik upgrade server :("
+        echo "Could not reach the mikrotik upgrade server :("
+        exit 1
+
     fi
 
     ROUTEROS_AVAILABLE_VERSION=$(echo "$ROUTEROS_AVAILABLE" | cut -d ' ' -f 1)
