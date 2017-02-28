@@ -21,10 +21,10 @@ if [ "$1" = "snmp" ]; then
         PARAM_COMMUNITY=$4
     fi
 
-    if ! ROUTEROS_INSTALLED=$(snmpget -O v -v 2c -c "$PARAM_COMMUNITY" "$2":"$PARAM_PORT" SNMPv2-SMI::mib-2.47.1.1.1.1.2.65536 2> /dev/null); then
+    if ! ROUTEROS_INSTALLED=$(snmpget -O qv -v 2c -c "$PARAM_COMMUNITY" "$2":"$PARAM_PORT" SNMPv2-SMI::enterprises.14988.1.1.4.4.0 2> /dev/null); then
         ERROR_MSG="Could not establish an SNMP connection to the device!"
     else
-        ROUTEROS_INSTALLED=$(echo "$ROUTEROS_INSTALLED" | cut -d ' ' -f 3)
+        ROUTEROS_INSTALLED=$(echo "$ROUTEROS_INSTALLED" | tr -d '"')
     fi
 elif [ "$1" = "ssh" ]; then
     if [ -z "$3" ]; then
