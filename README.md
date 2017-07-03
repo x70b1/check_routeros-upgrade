@@ -8,7 +8,7 @@ A simple monitoring plugin to check RouterOS for updates. A simple monitoring pl
 
 **Exampleoutput**
 * RouterOS 6.39.2 is up to date (release: 2017-Jun-06)
-* RouterOS is upgradable to 6.38.7 (release: 2017-Jun-20
+* RouterOS is upgradable to 6.38.7 (release: 2017-Jun-20)
 
 ## Configuration
 
