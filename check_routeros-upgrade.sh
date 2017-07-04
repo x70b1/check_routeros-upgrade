@@ -67,7 +67,7 @@ if [ "$error" = "0" ]; then
     esac
 
     # check the mikrotik server for upgrades
-    if ! routeros_available=$(curl -fsA 'check_routeros-upgrade' http://upgrade.mikrotik.com/routeros/LATEST.$param_version); then 
+    if ! routeros_available=$(curl -fsA 'check_routeros-upgrade' https://upgrade.mikrotik.com/routeros/LATEST.$param_version); then 
         echo "Could't reach the Mikrotik-Server!"
         exit 1
 
