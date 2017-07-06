@@ -41,7 +41,7 @@ elif [ "$1" = "ssh" ]; then
     if ! routeros_installed=$(ssh -q -p "$param_port" "$param_user"@"$2" ':put [/system package get system version]'); then
         error="Could not establish an SSH connection to the device!"
     else
-        routeros_installed=$(echo "$routeros_installed" | tr -d "\r\n")
+        routeros_installed=$(echo "$routeros_installed" | tr -d "\\r\\n")
     fi
 else
     echo "Use SNMP or SSH as connection type!"
@@ -67,24 +67,45 @@ if [ "$error" = "0" ]; then
     esac
 
     # check the mikrotik server for upgrades
-    if ! routeros_available=$(curl -fsA 'check_routeros-upgrade' https://upgrade.mikrotik.com/routeros/LATEST.$param_version); then 
-        echo "Could't reach the Mikrotik-Server!"
+    if ! routeros_available=$(curl -fsA "check_routeros-upgrade" http://upgrade.mikrotik.com/routeros/LATEST.$param_version); then
+        echo "Could not reach the Mikrotik server to check the latest version!"
         exit 1
-
     fi
 
-    routeros_available_version=$(echo "$routeros_available" | cut -d ' ' -f 1)
-    routeros_available_releasedate=$(echo "$routeros_available" | cut -d ' ' -f 2)
+    routeros_available_version=$(echo "$routeros_available" | cut -d " " -f 1)
+    routeros_available_releasedate=$(echo "$routeros_available" | cut -d " " -f 2)
 
     # compare latest version with device version
     if [ "$routeros_available_version" = "$routeros_installed" ]; then
-        echo "RouterOS $routeros_available_version is up to date (release: $(date -u -d @"$routeros_available_releasedate" +'%Y-%b-%d'))"
+        echo "RouterOS $routeros_available_version is up to date (release: $(date -u -d @"$routeros_available_releasedate" +'%b-%d'))"
         exit 0
     else
-        echo "RouterOS is upgradable to $routeros_available_version (release: $(date -u -d @"$routeros_available_releasedate" +'%Y-%b-%d'))"
-        exit 2
+        # read the changelog
+        if ! changelog=$(curl -fsA "check_routeros-upgrade" "https://upgrade.mikrotik.com/routeros/$routeros_available_version/CHANGELOG"); then
+            echo "Could not reach the Mikrotik server to read the changelog!"
+            exit 1
+        fi
+
+        changelog_lines=$(echo "$changelog" | grep -n "What" | head -n 2 | tail -n 1 | cut -d ":" -f 1)
+
+        changelog_impfix=$(echo "$changelog" | head -n "$changelog_lines" | grep -c '!)')
+        changelog_avgfix=$(echo "$changelog" | head -n "$changelog_lines" | grep -c '[*])')
+
+        if [ "$changelog_impfix" -ne 0 ] && [ "$changelog_avgfix" -ne 0 ]; then
+            fix_text="$changelog_impfix important fixes, $changelog_avgfix average fixes"
+            fix_result=2
+        elif [ "$changelog_impfix" -ne 0 ]; then
+            fix_text="$changelog_impfix important fixes"
+            fix_result=2
+        elif [ "$changelog_avgfix" -ne 0 ]; then
+            fix_text="$changelog_avgfix fixes"
+            fix_result=1
+        fi
+
+        echo "RouterOS is upgradable to $routeros_available_version ($fix_text)"
+        exit $fix_result
     fi
 else
     echo "$error"
-    exit 1
+    exit 2
 fi
