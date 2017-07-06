@@ -3,12 +3,18 @@
 A simple monitoring plugin to check RouterOS for updates. A simple monitoring plugin to check RouterOS for updates.
 
 **Features**
+
 * connect with SNMP or SSH
 * select your RouterOS release tree
+* read the changelog tho get more informations about bugfix importance
 
-**Exampleoutput**
-* RouterOS 6.39.2 is up to date (release: 2017-Jun-06)
-* RouterOS is upgradable to 6.38.7 (release: 2017-Jun-20)
+**Message and return code**
+
+The return code depends on the importance of the fixes found in the changelog. An important bugfix leads to a `CRTICAL`. Average fixes result in a `WARNING`. Some examples:
+
+* OK: RouterOS 6.39.2 is up to date (release: Jun-06)
+* WARNING: RouterOS is upgradable to 6.39.2 (6 fixes)
+* CRITICAL: RouterOS is upgradable to 6.38.7 (2 important fixes, 75 average fixes)
 
 ## Configuration
 
