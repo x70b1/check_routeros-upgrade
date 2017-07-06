@@ -6,7 +6,7 @@ A simple monitoring plugin to check RouterOS for updates. This script should wor
 
 * connect with SNMP or SSH
 * select your RouterOS release tree
-* read the changelog tho get more informations about bugfix importance
+* read the changelog to get more information about bugfix importance
 
 **Message and return code**
 
