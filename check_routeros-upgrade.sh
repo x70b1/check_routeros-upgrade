@@ -98,7 +98,7 @@ if [ "$error" = "0" ]; then
             fix_text="$changelog_impfix important fixes"
             fix_result=2
         elif [ "$changelog_avgfix" -ne 0 ]; then
-            fix_text="$changelog_avgfix fixes"
+            fix_text="$changelog_avgfix average fixes"
             fix_result=1
         fi
 

@@ -13,7 +13,7 @@ A simple monitoring plugin to check RouterOS for updates. A simple monitoring pl
 The return code depends on the importance of the fixes found in the changelog. An important bugfix leads to a `CRTICAL`. Average fixes result in a `WARNING`. Some examples:
 
 * OK: RouterOS 6.39.2 is up to date (release: Jun-06)
-* WARNING: RouterOS is upgradable to 6.39.2 (6 fixes)
+* WARNING: RouterOS is upgradable to 6.39.2 (6 average fixes)
 * CRITICAL: RouterOS is upgradable to 6.38.7 (2 important fixes, 75 average fixes)
 
 ## Configuration
