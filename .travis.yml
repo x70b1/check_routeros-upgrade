@@ -10,4 +10,4 @@ before_script:
     - shellcheck --version
 
 script:
-    - shellcheck -s ${TRAVIS_BUILD_DIR}/check_routeros-upgrade.sh
+    - shellcheck ${TRAVIS_BUILD_DIR}/check_routeros-upgrade.sh
