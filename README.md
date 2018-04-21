@@ -1,5 +1,9 @@
 # check_routeros-upgrade
 
+[![Build Status](https://travis-ci.org/x70b1/check_routeros-upgrade.svg?branch=master)](https://travis-ci.org/x70b1/check_routeros-upgrade)
+[![GitHub contributors](https://img.shields.io/github/contributors/x70b1/check_routeros-upgrade.svg)](https://github.com/x70b1/check_routeros-upgrade/graphs/contributors)
+[![license](https://img.shields.io/github/license/x70b1/check_routeros-upgrade.svg)](https://github.com/x70b1/check_routeros-upgrade/blob/master/LICENSE)
+
 A simple monitoring plugin to check RouterOS for updates. This script should work with different monitoring frameworks like Nagios, Icinga, Naemon, Shinken or Sensu.
 
 **Features**
