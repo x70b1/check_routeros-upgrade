@@ -42,3 +42,7 @@ Different settings are available. The default is `stable`. Choose wise.
 * stable
 * bugfix
 * release-candidate
+
+**ENV ROUTEROS_UPDATEURL**
+
+If you want to save the update information on your own server you can use `export ROUTEROS_UPDATEURL` to overwrite the default `https://download.mikrotik.com/routeros`.

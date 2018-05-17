@@ -6,6 +6,11 @@
 
 error="0"
 
+if [ -z "${ROUTEROS_UPDATEURL}" ]; then
+    routeros_url="https://download.mikrotik.com/routeros"
+else
+    routeros_url="${ROUTEROS_UPDATEURL}"
+fi
 
 if [ "$1" = "snmp" ]; then
     if [ -z "$3" ]; then
@@ -67,7 +72,7 @@ if [ "$error" = "0" ]; then
     esac
 
     # check the MikroTik server for upgrades
-    if ! routeros_available=$(curl -fsA "check_routeros-upgrade" https://download.mikrotik.com/routeros/LATEST.$param_version); then
+    if ! routeros_available=$(curl -fsA "check_routeros-upgrade" "$routeros_url/LATEST.$param_version"); then
         echo "Could not reach the MikroTik server to check the latest version!"
         exit 1
     fi
@@ -81,7 +86,7 @@ if [ "$error" = "0" ]; then
         exit 0
     else
         # read the changelog
-        if ! changelog=$(curl -fsA "check_routeros-upgrade" "https://download.mikrotik.com/routeros/$routeros_available_version/CHANGELOG"); then
+        if ! changelog=$(curl -fsA "check_routeros-upgrade" "$routeros_url/$routeros_available_version/CHANGELOG"); then
             echo "Could not reach the MikroTik server to read the changelog!"
             exit 1
         fi
