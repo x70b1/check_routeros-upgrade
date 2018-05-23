@@ -20,6 +20,10 @@ The return code depends on the importance of the fixes found in the changelog. A
 * WARNING: RouterOS is upgradable to 6.39.2 (6 average fixes)
 * CRITICAL: RouterOS is upgradable to 6.38.7 (2 important fixes, 75 average fixes)
 
+## Installation
+
+This script is available as sensu-plugin in `sensu-plugins-routeros`.
+
 ## Configuration
 
 * sh **check_routeros-upgrade.sh** *snmp* *HOST* [*PORT*] [*COMMUNITY*] [*RELEASE-TREE*]
