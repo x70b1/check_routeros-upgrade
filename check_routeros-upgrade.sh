@@ -50,6 +50,11 @@ elif [ "$1" = "ssh" ]; then
     fi
 else
     echo "Use SNMP or SSH as connection type!"
+    echo "You will need at least 2 parameters."
+    echo ""
+    echo Ways of use is:
+    echo "sh check_routeros-upgrade.sh snmp HOST [PORT] [COMMUNITY] [RELEASE-TREE]"
+    echo "sh check_routeros-upgrade.sh ssh HOST [PORT] [USER] [RELEASE-TREE]"
     exit 2
 fi
 
