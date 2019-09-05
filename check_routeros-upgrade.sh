@@ -25,7 +25,7 @@ if [ "$1" = "snmp" ]; then
         param_community=$4
     fi
 
-    if ! routeros_installed=$(snmpget -O qv -v 2c -c "$param_community" "$2":"$param_port" SNMPv2-SMI::enterprises.14988.1.1.4.4.0 2> /dev/null); then
+    if ! routeros_installed=$(snmpget -O qv -v 2c -c "$param_community" "$2":"$param_port" .1.3.6.1.4.1.14988.1.1.4.4.0 2> /dev/null); then
         error="Could not establish an SNMP connection to the device!"
     else
         routeros_installed=$(echo "$routeros_installed" | tr -d '"')
