@@ -1,6 +1,6 @@
 # check_routeros-upgrade
 
-![Codecheck](https://github.com/x70b1/check_routeros-upgrade/workflows/Codecheck/badge.svg)
+[![Codecheck](https://github.com/x70b1/check_routeros-upgrade/workflows/Codecheck/badge.svg)](https://github.com/x70b1/check_routeros-upgrade/actions)
 [![GitHub contributors](https://img.shields.io/github/contributors/x70b1/check_routeros-upgrade.svg)](https://github.com/x70b1/check_routeros-upgrade/graphs/contributors)
 [![license](https://img.shields.io/github/license/x70b1/check_routeros-upgrade.svg)](https://github.com/x70b1/check_routeros-upgrade/blob/master/LICENSE)
 
