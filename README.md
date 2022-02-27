@@ -1,28 +1,32 @@
 # check_routeros-upgrade
 
-[![Codecheck](https://github.com/x70b1/check_routeros-upgrade/workflows/Codecheck/badge.svg)](https://github.com/x70b1/check_routeros-upgrade/actions)
+[![Codecheck](https://github.com/x70b1/check_routeros-upgrade/workflows/Codecheck/badge.svg?branch=master)](https://github.com/x70b1/check_routeros-upgrade/actions)
 [![GitHub contributors](https://img.shields.io/github/contributors/x70b1/check_routeros-upgrade.svg)](https://github.com/x70b1/check_routeros-upgrade/graphs/contributors)
 [![license](https://img.shields.io/github/license/x70b1/check_routeros-upgrade.svg)](https://github.com/x70b1/check_routeros-upgrade/blob/master/LICENSE)
 
-A simple monitoring plugin to check RouterOS for updates. This script should work with different monitoring frameworks like Nagios, Icinga, Naemon, Shinken or Sensu.
 
-**Features**
+A simple monitoring plugin to check RouterOS for updates.
+
+This script should work with different monitoring frameworks like Nagios, Icinga, Naemon, Shinken or Sensu.
+
+
+## Features
 
 * connect with SNMP or SSH
 * select your RouterOS release tree
 * read the changelog to get more information about bugfix importance
 
-**Message and return code**
-
-The return code depends on the importance of the fixes found in the changelog. An important bugfix leads to a `CRITICAL`. Average fixes result in a `WARNING`. Some examples:
+The return code depends on the importance of the fixes found in the changelog.
+An important bugfix leads to a `CRITICAL`.
+Average fixes result in a `WARNING`.
+Some examples:
 
 * OK: RouterOS 6.39.2 is up to date (release: Jun-06)
 * WARNING: RouterOS is upgradable to 6.39.2 (6 average fixes)
 * CRITICAL: RouterOS is upgradable to 6.38.7 (2 important fixes, 75 average fixes)
 
-## Installation
+This script is also available as sensu-plugin in `sensu-plugins-routeros`.
 
-This script is available as sensu-plugin in `sensu-plugins-routeros`.
 
 ## Configuration
 
